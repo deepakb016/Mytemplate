@@ -1,3 +1,39 @@
+PY := python
+PIP := $(PY) -m pip
+
+.PHONY: help install install-playwright test ui lint security reports clean
+
+help:
+	@echo "Makefile targets: install, install-playwright, test, ui, lint, security, reports, clean"
+
+install:
+	$(PIP) install -r requirements.txt
+
+install-playwright:
+	$(PY) -m playwright install chromium
+
+reports:
+	$(PY) -c "import pathlib; pathlib.Path('reports').mkdir(exist_ok=True)"
+
+test: reports
+	$(PY) -m pytest --junitxml=reports/unit.xml --cov=app --cov-report=xml --cov-report=html
+
+ui: reports
+	$(PY) -m pytest tests/test_ui.py --junitxml=reports/ui.xml
+
+lint:
+	ruff check .
+
+security: reports
+	bandit -r app -f json -o reports/security.json
+
+clean:
+	$(PY) -c "import shutil
+import pathlib
+shutil.rmtree('reports', ignore_errors=True)
+shutil.rmtree('.pytest_cache', ignore_errors=True)
+shutil.rmtree('htmlcov', ignore_errors=True)
+print('cleaned')"
 .PHONY: docs test agent-setup agent-resetdb agent-smoke agent-test
 
 VENV_PYTHON=env/bin/python

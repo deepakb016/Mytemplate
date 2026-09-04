@@ -1,8 +1,8 @@
-[![Ignite](https://user-images.githubusercontent.com/882381/45938197-49cfb880-bf7c-11e8-91ea-94fffd9d054a.png)](https://github.com/sumukh/ignite)
+[![MyTemplate](https://user-images.githubusercontent.com/882381/45938197-49cfb880-bf7c-11e8-91ea-94fffd9d054a.png)](https://github.com/sumukh/MyTemplate)
 
-# Ignite for Flask [![Flask PyTest CI](https://github.com/Sumukh/Ignite/actions/workflows/flask-pytest.yml/badge.svg)](https://github.com/Sumukh/Ignite/actions/workflows/flask-pytest.yml)
+# MyTemplate for Flask [![Flask PyTest CI](https://github.com/Sumukh/MyTemplate/actions/workflows/flask-pytest.yml/badge.svg)](https://github.com/Sumukh/MyTemplate/actions/workflows/flask-pytest.yml)
 
-Ignite is a scaffold for starting new SaaS applications built using Python and Flask. It takes care of the boilerplate code (like User Registration, OAuth, Teams, and Billing), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
+MyTemplate is a scaffold for starting new SaaS applications built using Python and Flask. It takes care of the boilerplate code (like User Registration, OAuth, Teams, and Billing), allowing you to focus on building your application. MyTemplate is built upon best practices for modern Flask applications.
 
 ## Features
 
@@ -21,7 +21,7 @@ Ignite is a scaffold for starting new SaaS applications built using Python and F
 | Basic Test Suite                      | ✅                                           | Starting point for you to build out tests                                                  |
 | VS Code Debugger & Editor             | ✅                                           | Configured to make you productive                                                          |
 | Tested on Windows 10, OSX, and Ubuntu | ✅                                           | Using Python 3                                                                             |
-| SaaS Recurring Billing                | 💲 (Requires purchasing a license to Ignite) | Team Billing, Usage Based Billing or Unlimited Plans                                       |
+| SaaS Recurring Billing                | 💲 (Requires purchasing a license to MyTemplate) | Team Billing, Usage Based Billing or Unlimited Plans                                       |
 | Commercial Usage                      | 💲 (License Required)                        | Commercial Usage requires a purchased license                                              |
 | Video Content                         | 💲                                           | Available as part of [the Fullstack Flask course](https://www.newline.co/fullstack-flask/) |
 
@@ -29,7 +29,7 @@ Ignite is a scaffold for starting new SaaS applications built using Python and F
 
 | Store                  | Comes With                                                                                                                     | Price                                                                       |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| Fullstack Flask Course | The Fullstack Flask Course & Book, hours of videos explaining how to build a SaaS in Flask, and a single license to Ignite Pro | [On Sale (for ~$199) at Newline »](https://www.newline.co/fullstack-flask/) |
+| Fullstack Flask Course | The Fullstack Flask Course & Book, hours of videos explaining how to build a SaaS in Flask, and a single license to MyTemplate Pro | [On Sale (for ~$199) at Newline »](https://www.newline.co/fullstack-flask/) |
 | Commercial License     | A license for usage on a single site                                                                                           | [($199) »](https://gumroad.com/l/xFvLo)                                     |
 
 ## Setup
@@ -76,6 +76,43 @@ To run tests locally, try this command:
 APPNAME_ENV=test ./manage.py test --coverage
 ```
 
+### Continuous Integration (GitHub Actions)
+
+A GitHub Actions workflow is provided at `.github/workflows/ci.yml`. It runs the Makefile targets to:
+
+- install dependencies
+- run unit tests with coverage (produces `reports/unit.xml` and HTML coverage)
+- run UI tests (`reports/ui.xml`)
+- lint the repo with `ruff`
+- run `bandit` security scan and output `reports/security.json`
+
+The CI job uploads the `reports/` folder as an artifact; check the workflow run's Artifacts section to download test and security reports.
+
+Run the same targets locally with the Makefile:
+
+```bash
+# Install deps and Playwright browsers
+python -m pip install -r requirements.txt
+python -m pip install ruff bandit
+python -m playwright install chromium
+
+# Generate reports directory (if missing)
+make reports
+
+# Run unit tests + coverage
+make test
+
+# Run UI tests
+make ui
+
+# Lint and security
+make lint
+make security
+```
+
+When you're ready to run CI, push your branch to the repository and open a Pull Request — GitHub Actions will execute the workflow and provide the `reports/` artifacts for download.
+
+
 ### Local Secrets
 
 To configure OAuth login and Stripe billing in development, you will need to set some environment variables. See `.env.local.sample` for an example.
@@ -91,7 +128,7 @@ You may also want to change some of the constants in `appname.constants` and the
 
 ## Deployment
 
-Ignite is not tied to a specific platform for deployment, but it works well on [Heroku](http://heroku.com) and [Dokku](http://dokku.viewdocs.io/dokku/) with minimal configuration.
+MyTemplate is not tied to a specific platform for deployment, but it works well on [Heroku](http://heroku.com) and [Dokku](http://dokku.viewdocs.io/dokku/) with minimal configuration.
 
 It is also designed to work well on other cloud providers such as AWS, Google Cloud, and DigitalOcean.
 
@@ -123,23 +160,23 @@ Documentation is currently provided for installations on Dokku.
 
 ## License
 
-This is a commercial product. You may purchase a license for commercial use at [Ignite Website](https://ignite.sumukh.me)
+This is a commercial product. You may purchase a license for commercial use at [MyTemplate Website](https://MyTemplate.sumukh.me)
 
 Here's a summary:
 
-| Features                                     | Ignite         | (License) Ignite Premium |
+| Features                                     | MyTemplate         | (License) MyTemplate Premium |
 | -------------------------------------------- | -------------- | ------------------------ |
 | Cost                                         | Free           | $199 per site            |
 | Private Non Commercial Use                   | ✅             | ✅                       |
 | Commercial Use                               | No             | ✅                       |
-| Ability to remove "Powered by Ignite" footer | No             | ✅                       |
+| Ability to remove "Powered by MyTemplate" footer | No             | ✅                       |
 | Video Tutorials                              | No             | ✅                       |
 | Re-license                                   | No             | Contact us               |
 | Support                                      | No             | No                       |
 | Warranty                                     | Provided As-is | Provided As-is           |
 | Refunds                                      | N/A            | 30 Day                   |
 
-You can purchase a license at the [Ignite Store](https://gumroad.com/l/xFvLo) or on [Newline as part of the Fullstack Flask course](https://www.newline.co/fullstack-flask/)
+You can purchase a license at the [MyTemplate Store](https://gumroad.com/l/xFvLo) or on [Newline as part of the Fullstack Flask course](https://www.newline.co/fullstack-flask/)
 
 For more detailed license information see LICENSE.md
 

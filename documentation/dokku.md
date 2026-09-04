@@ -16,35 +16,35 @@ git push dokku master # (from the master branch)
 Now we'll create the database & redis
 
 ```
-dokku config:set ignite APPNAME_ENV=prod FLASK_APP=manage.py
-dokku postgres:create ignite
-dokku postgres:link ignite ignite
-dokku redis:create ignite
-dokku redis:link ignite ignite
+dokku config:set MyTemplate APPNAME_ENV=prod FLASK_APP=manage.py
+dokku postgres:create MyTemplate
+dokku postgres:link MyTemplate MyTemplate
+dokku redis:create MyTemplate
+dokku redis:link MyTemplate MyTemplate
 ```
 
 Lets setup the tables & secret key
 ```
-dokku run ignite ./manage.py initdb
-dokku run ignite ./manage.py generate-session-key
-dokku config:set ignite SECRET_KEY=<value-from-above> --no-restart
+dokku run MyTemplate ./manage.py initdb
+dokku run MyTemplate ./manage.py generate-session-key
+dokku config:set MyTemplate SECRET_KEY=<value-from-above> --no-restart
 ```
 
 Next we'll set some basic environment variables
 
 ```
 # If you haven't already:
-# dokku config:set ignite APPNAME_ENV=prod
+# dokku config:set MyTemplate APPNAME_ENV=prod
 
-dokku config:set ignite MAIL_USERNAME='' MAIL_PASSWORD='' MAIL_DEFAULT_SENDER="appname\ <appname@appname.com>"
+dokku config:set MyTemplate MAIL_USERNAME='' MAIL_PASSWORD='' MAIL_DEFAULT_SENDER="appname\ <appname@appname.com>"
 
-dokku config:set ignite GOOGLE_CONSUMER_KEY='' GOOGLE_CONSUMER_SECRET=''  STRIPE_SECRET_KEY='' STRIPE_PUBLISHABLE_KEY='' SENTRY_DSN=''
+dokku config:set MyTemplate GOOGLE_CONSUMER_KEY='' GOOGLE_CONSUMER_SECRET=''  STRIPE_SECRET_KEY='' STRIPE_PUBLISHABLE_KEY='' SENTRY_DSN=''
 ```
 
 Now lets add you as an admin user
 
 ```
-dokku run ignite flask shell
+dokku run MyTemplate flask shell
 
 > user = User(email="youremail@gmail.com", password="", admin=True, role='admin')
 > db.session.add(user)
