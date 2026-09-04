@@ -86,7 +86,7 @@ class TestConfig(Config):
     ASSETS_DEBUG = True
 
     # Use a lightweight in-memory cache for tests
-    CACHE_TYPE = 'SimpleCache'
+    CACHE_TYPE = 'null'
     CACHE_NO_NULL_WARNING = True
     WTF_CSRF_ENABLED = False
     RQ_ASYNC = False
