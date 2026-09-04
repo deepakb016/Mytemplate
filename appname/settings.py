@@ -65,7 +65,7 @@ class DevConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
 
-    CACHE_TYPE = 'simple'
+    CACHE_TYPE = 'SimpleCache'
     # Don't do anything fancy with the assets pipeline (faster + easier to debug)
     ASSETS_DEBUG = True
     # Run jobs instantly, without needing to spin up a worker
@@ -85,8 +85,8 @@ class TestConfig(Config):
     SQLALCHEMY_ECHO = False  # Optionally enable if you want to see database actions
     ASSETS_DEBUG = True
 
-    # Use simple cache for tests
-    CACHE_TYPE = 'simple'
+    # Use NullCache for tests (no caching)
+    CACHE_TYPE = 'NullCache'
     CACHE_NO_NULL_WARNING = True
     WTF_CSRF_ENABLED = False
     RQ_ASYNC = False
