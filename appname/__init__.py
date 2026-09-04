@@ -55,11 +55,6 @@ def create_app(object_name):
     app = Flask(__name__)
     app.config.from_object(object_name)
 
-    # Force a null cache for test environments to avoid
-    # backend import issues on some CI/local setups.
-    if app.config.get('ENV') == 'test':
-        app.config['CACHE_TYPE'] = 'null'
-
     # initialize the cache
     cache.init_app(app)
 
