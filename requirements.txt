@@ -88,5 +88,5 @@ pytest-cov==4.0.0
 mccabe==0.7.0
 flake8==6.0.0
 # UI testing (Playwright)
-pytest-playwright
-playwright
+pytest-playwright==0.5.0
+playwright==1.44.0
