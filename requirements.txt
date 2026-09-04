@@ -92,4 +92,5 @@ mccabe==0.7.0
 flake8==6.0.0
 # UI testing (Playwright)
 pytest-playwright==0.5.0
-playwright==1.44.0
+# Playwright/browser automation requirements have been moved to requirements-playwright.txt
+# to avoid pulling heavy UI deps into every CI run. Install when running UI tests.
